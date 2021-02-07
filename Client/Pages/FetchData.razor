@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @using System.Globalization
+@using global::Shared
 @inject HttpClient Http
 
 <h1>Book Store</h1>
@@ -52,14 +53,5 @@ else
         {
             _errorInfo = e.ToString();
         }
-    }
-
-    public class Book
-    {
-        public string Title { get; set; }
-
-        public string Author { get; set; }
-
-        public int Year { get; set; }
     }
 }
