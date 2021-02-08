@@ -1,0 +1,48 @@
+﻿@inject HttpClient Http
+
+@if (_me == null)
+{
+    <p>Loading User...</p>
+}
+else
+{
+    if (_me.ClientPrincipal == null)
+    {
+        <a href="/.auth/login/github">Login</a>
+    }
+    else
+    {
+        <span>Hi @_me.ClientPrincipal.UserDetails!</span>
+        <a href="/.auth/logout">Logout</a>
+    }
+}
+
+@code {
+
+    public class ClientPrincipal
+    {
+        public string IdentityProvider { get; set; }
+        public string UserId { get; set; }
+        public string UserDetails { get; set; }
+        public List<string> UserRoles { get; set; }
+    }
+
+    public class AuthDetails
+    {
+        public ClientPrincipal ClientPrincipal { get; set; }
+    }
+
+    private AuthDetails _me;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _me = await Http.GetFromJsonAsync<AuthDetails>("/.auth/me");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+    }
+}
