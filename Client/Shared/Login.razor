@@ -8,12 +8,12 @@ else
 {
     if (_me.ClientPrincipal == null)
     {
-        <a href="/.auth/login/github">Login</a>
+        <a href="/login">Login</a>
     }
     else
     {
         <span>Hi @_me.ClientPrincipal.UserDetails!</span>
-        <a href="/.auth/logout">Logout</a>
+        <a href="/logout">Logout</a>
     }
 }
 
